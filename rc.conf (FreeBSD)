@@ -1,0 +1,28 @@
+hostname="<your machine hostname>"
+ifconfig_alc0="DHCP"
+sshd_enable="YES"
+ntpd_enable="YES"
+powerd_enable="YES"
+
+openvpn_enable="YES"
+openvpn_configfile="/path/to/file/server.conf"
+openvpn_if="tun"
+
+pf_enable="YES"
+pf_rules="/etc/pf.conf"
+pflog_enable="YES"
+
+gateway_enable="YES"
+#ipv6_gateway_enable="YES"
+natd_enable="YES"
+natd_interface="<your network interface name here>"
+natd_flags="-dynamic -m"
+
+# Set dumpdev to "AUTO" to enable crash dumps, "NO" to disable
+dumpdev="YES"
+
+sshguard_enable="YES"
+sshguard_watch_logs="/var/log/auth.log"
+sshguard_safety_thresh="4"
+sshguard_pardon_min_interval="10800"
+sshguard_prescribe_interval="7200"
