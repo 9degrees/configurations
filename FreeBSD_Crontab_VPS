@@ -1,0 +1,19 @@
+# Crontab file
+# Fields: Minute, Hour, Day-of-Month, Month, Day-of_Week
+
+PATH=/etc:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin
+
+# zfstools take automatic snapshots
+40 */6 * * * /usr/local/sbin/zfs-auto-snapshot hourly 4
+7 0 * * * /usr/local/sbin/zfs-auto-snapshot daily 7
+14 0 * * 7 /usr/local/sbin/zfs-auto-snapshot weekly 4
+28 0 1 * * /usr/local/sbin/zfs-auto-snapshot monthly 12
+
+# zxfer run backup to remote host
+45 */6 * * * /usr/local/sbin/zxfer -dFkPv -T root@remote-host -R zroot zroot/VPSbackup
+
+# Backup MySQL database
+00 05 * * * /usr/local/etc/mysql-backup.sh
+
+# Renew Letsencrypt certs
+00 04 * * 0 /usr/local/bin/certbot renew -q --standalone --pre-hook "service nginx stop" --post-hook "service nginx start"
